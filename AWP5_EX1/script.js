@@ -13,7 +13,7 @@ function showError(input, message) {
 }
 
 // Show Succes outline
-function showSucces(input) {
+function showSuccess(input) {
     const formControl = input.parentElement;
     formControl.className = 'form-control success';
 }
@@ -22,7 +22,7 @@ function showSucces(input) {
 function checkEmail(input) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(input.value.trim())) {
-        showSucces(input);
+        showSuccess(input);
     } else {
         showError(input, 'Email is not valid');
     }
@@ -32,9 +32,9 @@ function checkEmail(input) {
 function checkRequired(inputArr) {
     inputArr.forEach(function (input) {
         if (input.value.trim() === '') {
-            showError(input, `${getFieldName(input)}is required`);
+            showError(input, `${getFieldName(input)} is required`);
         } else {
-            showSucces(input);
+            showSuccess(input);
         }
     });
 }
@@ -43,11 +43,11 @@ function checkRequired(inputArr) {
 
 function checkLength(input, min, max) {
     if (input.value.length) {
-        showError(input, `${getFieldName(input)}must be at least ${min} characters`);
+        showError(input, `${getFieldName(input)} must be at least ${min} characters`);
     } else if (input.value.length > max) {
-        showError(input, `${getFieldName(input)}must be less than ${max} characters`);
+        showError(input, `${getFieldName(input)} must be less than ${max} characters`);
     } else {
-        showSucces(input);
+        showSuccess(input);
     }
 }
 
@@ -60,7 +60,7 @@ function checkPasswordsMatch(input1, input2) {
 
 // Get field names
 function getFieldName(input) {
-    return input.id.CharAt(0).toUpperCase() + input.id.slice(1);
+    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
 // Event listeners
