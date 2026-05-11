@@ -3,6 +3,7 @@ const username = document.getElementById('username');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
+const age = document.getElementById('age');
 
 // Show input error message
 function showError(input, message) {
@@ -61,6 +62,15 @@ function checkPasswordsMatch(input1, input2) {
     }
 }
 
+// Check age is realistic
+function checkAgeIsCorrect(input) {
+    if (input.value >= 0 && input.value < 1000) {
+        showSuccess(input);
+    } else {
+        showError(input, `${getFieldName(input)} is not correct`);
+    }
+}
+
 
 // Get field name
 function getFieldName(input) {
@@ -76,4 +86,5 @@ form.addEventListener('submit', function (e) {
     checkLength(password, 6, 25);
     checkEmail(email);
     checkPasswordsMatch(password, password2);
+    checkAgeIsCorrect(age);
 });
