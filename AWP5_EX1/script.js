@@ -55,6 +55,18 @@ function checkLength(input, min, max) {
     }
 }
 
+// Make sure password has more than 8 characters, upper and lower case and symbols
+function verifyPassword(input) {
+    var lowerCaseLetters = /[a-z]/g;
+    var upperCaseLetters = /[A-Z]/g;
+    var numbers = /[0-9]/g;
+    if (input.length >= 8 && input.value.match(lowerCaseLetters) && input.value.match(upperCaseLetters) && input.value.match(numbers)) {
+        showSuccess(input);
+    } else {
+        showError(input, `${getFieldName(input)} Password must be at least 8 characters long, must contain uppercase and lowercase letters, and symbols.`);
+    }
+}
+
 // Check passwords march
 function checkPasswordsMatch(input1, input2) {
     if (input1.value !== input2.value) {
@@ -85,6 +97,7 @@ form.addEventListener('submit', function (e) {
     checkLength(username, 3, 15);
     checkLength(password, 6, 25);
     checkEmail(email);
+    verifyPassword(password);
     checkPasswordsMatch(password, password2);
     checkAgeIsCorrect(age);
 });
