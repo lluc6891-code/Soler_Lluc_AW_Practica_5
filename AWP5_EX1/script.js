@@ -57,20 +57,21 @@ function checkLength(input, min, max) {
 
 // Make sure password has more than 8 characters, upper and lower case and symbols
 function verifyPassword(input) {
-    var lowerCaseLetters = /[a-z]/g;
+    var validation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$/;
+    /**var lowerCaseLetters = /[a-z]/g;
     var upperCaseLetters = /[A-Z]/g;
-    var numbers = /[0-9]/g;
-    if (input.length >= 8 && input.value.match(lowerCaseLetters) && input.value.match(upperCaseLetters) && input.value.match(numbers)) {
+    var numbers = /[0-9]/g; **/
+    if (input.value.match(validation)) {
         showSuccess(input);
     } else {
-        showError(input, `${getFieldName(input)} Password must be at least 8 characters long, must contain uppercase and lowercase letters, and symbols.`);
+        showError(input, `Password is not secure!`);
     }
 }
 
 // Check passwords march
 function checkPasswordsMatch(input1, input2) {
     if (input1.value !== input2.value) {
-        showError(input2, 'Passwords do not match')
+        showError(input2, 'Passwords do not match');
     }
 }
 
@@ -95,7 +96,7 @@ form.addEventListener('submit', function (e) {
 
     checkRequired([username, email, password, password2]);
     checkLength(username, 3, 15);
-    checkLength(password, 6, 25);
+    //checkLength(password, 6, 25);
     checkEmail(email);
     verifyPassword(password);
     checkPasswordsMatch(password, password2);
