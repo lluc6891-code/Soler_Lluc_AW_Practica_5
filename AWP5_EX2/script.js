@@ -6,6 +6,8 @@ const amountEl_two = document.getElementById('amount-two');
 const rateEl = document.getElementById('rate');
 const swap = document.getElementById('swap');
 
+const waiting = document.getElementById("waiting");
+
 // Fetch exchange rates and update the DOM
 function calculate() {
     const currency_one = currencyEl_one.value;
@@ -22,6 +24,15 @@ function calculate() {
         });
 }
 
+// Functions to add a waiting text
+function pleaseWait(input) {
+    input.className = 'waiting-process';
+}
+
+function doneWaiting(input) {
+    input.className = 'waiting';
+}
+
 // Event listeners
 currencyEl_one.addEventListener('change', calculate);
 amountEl_one.addEventListener('input', calculate);
@@ -30,10 +41,14 @@ amountEl_two.addEventListener('input', calculate);
 
 
 swap.addEventListener('click', () => {
+    pleaseWait(waiting);
     const temp = currencyEl_one.value;
     currencyEl_one.value = currencyEl_two.value;
     currencyEl_two.value = temp;
     calculate();
+    doneWaiting(waiting);
 });
 
+
 calculate();
+
